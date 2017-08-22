@@ -96,7 +96,7 @@ dec2reversebin() {
 
 parameter_data() {
     echo -n PARM
-    dec2reversebin "$(stat -f %z "$1")"
+    dec2reversebin "$(stat -c%s "$1")"
     cat "$1"
     dec2reversebin "$(qnc_crc32 "$1")"
 }
