@@ -156,6 +156,13 @@ for partition in "${partitions[@]}"; do
     echo "OK"
 done
 
+# Enable magic number: https://github.com/rock64-android/u-boot/blob/ef6f23e3e2145604da72cd9d8ae93227775028ba/board/rockchip/common/mediaboot/sdmmcBoot.c#L125
+echo -n "Marking as boot... "
+echo "0 01 00 00 00" | xxd -r -g 4 | dd of="$OUTPUT" bs=1 seek=$((64*512+(128+104/4)*4)) count=4 conv=notrunc
+echo "OK"
+
+echo -n "Compressing... "
 pigz "$OUTPUT"
+echo "OK"
 
 echo "Done."
