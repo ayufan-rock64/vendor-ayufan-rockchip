@@ -156,4 +156,6 @@ for partition in "${partitions[@]}"; do
     echo "OK"
 done
 
+pigz "$OUTPUT"
+
 echo "Done."
